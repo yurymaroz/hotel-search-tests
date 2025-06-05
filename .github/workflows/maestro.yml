@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  upload:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout current (test) repo
@@ -17,10 +17,17 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
-      - name: Build Flutter debug APK
+      - name: Create .env file
+        run: |
+          echo "SERPAPI_API_KEY=${{ secrets.SERPAPI_API_KEY }}" > flutter_app/.env
+      - name: Generate env.g.dart
         run: |
           cd flutter_app
           flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
+      - name: Build Flutter debug APK
+        run: |
+          cd flutter_app
           flutter build apk --debug
       - uses: mobile-dev-inc/action-maestro-cloud@v1
         with:
