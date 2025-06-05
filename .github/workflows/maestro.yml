@@ -9,7 +9,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout current (test) repo
+      - name: Checkout current repo
         uses: actions/checkout@v3
       - name: Clone Flutter app repo
         run: |
@@ -34,6 +34,3 @@ jobs:
           api-key: ${{ secrets.MAESTRO_API_KEY }}
           project-id: ${{ secrets.MAESTRO_PROJECT_ID}}
           app-file: flutter_app/build/app/outputs/flutter-apk/app-debug.apk
-      - name: Run Maestro Tests
-        run: |
-          maestro test .maestro --debug-output ./output
