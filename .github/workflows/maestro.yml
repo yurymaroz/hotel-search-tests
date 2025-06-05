@@ -1,9 +1,9 @@
 name: Build and run Maestro tests (Flutter Android)
 
-# on:
-#   push:
-#     branches:
-#       - main # Trigger tests on push to the main branch
+on:
+  push:
+    branches:
+      - main # Trigger tests on push to the main branch
 #   pull_request:
 #     branches:
 #       - main # Trigger tests on pull request to the main branch
