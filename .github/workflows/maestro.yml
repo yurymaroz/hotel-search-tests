@@ -3,25 +3,30 @@ name: Build and run Maestro tests (Flutter Android)
 on:
   push:
     branches:
-      - main # Trigger tests on push to the main branch
-#   pull_request:
-#     branches:
-#       - main # Trigger tests on pull request to the main branch
+      - main
 
 jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout current (test) repo
+        uses: actions/checkout@v3
+      - name: Clone Flutter app repo
+        run: |
+          git clone https://github.com/Buenro/hotel-search.git flutter_app
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
-      - run: flutter build apk --debug
+      - name: Build Flutter debug APK
+        run: |
+          cd flutter_app
+          flutter pub get
+          flutter build apk --debug
       - uses: mobile-dev-inc/action-maestro-cloud@v1
         with:
           api-key: ${{ secrets.MAESTRO_API_KEY }}
           project-id: org_01jx0rcw50e6ca7c88r3wxpq70
-          app-file: build/app/outputs/flutter-apk/app-debug.apk
+          app-file: flutter_app/build/app/outputs/flutter-apk/app-debug.apk
       - name: Run Maestro Tests
         run: |
           maestro test flows/search.yaml --debug-output ./output
