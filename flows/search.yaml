@@ -1,0 +1,8 @@
+config:
+  timeout: 180000
+
+appId: com.example.hotel_booking
+---
+- launchApp
+- tapOn: "Hotels\nTab 2 of 4"
+- assertVisible: "Search Hotels"
