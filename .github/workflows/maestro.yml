@@ -36,4 +36,4 @@ jobs:
           app-file: flutter_app/build/app/outputs/flutter-apk/app-debug.apk
       - name: Run Maestro Tests
         run: |
-          maestro test .maestro/flows/search.yaml --debug-output ./output
+          maestro test .maestro --debug-output ./output
