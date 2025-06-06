@@ -106,5 +106,5 @@ workflow_dispatch:`
       uses: rtCamp/action-slack-notify@v2
       env:
       SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      SLACK_COLOR: '#FF0000'
+      SLACK_COLOR: '{{color}}'
       SLACK_MESSAGE: 'Workflow failed on ${{ github.repository }}'
