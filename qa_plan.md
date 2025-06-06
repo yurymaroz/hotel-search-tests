@@ -11,7 +11,7 @@
 
 ## Detailed and Prioritized Test Scenarios
 
-### 🔍 Hotel Search
+### Hotel Search
 
 | ID   | Priority | Scenario                              | Description / Steps                           | Expected Outcome                                             |
 | ---- | -------- | ------------------------------------- | --------------------------------------------- | ------------------------------------------------------------ |

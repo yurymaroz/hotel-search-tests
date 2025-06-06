@@ -101,10 +101,10 @@ workflow_dispatch:`
 13. How to configure manual notification via Actions (e.g. Slack and etc.)
     Use an action step in your workflow to send messages when jobs succeed or fail. For example:
 
-    - name: Notify Slack on Failure
-      if: failure()
-      uses: rtCamp/action-slack-notify@v2
-      env:
-      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      SLACK_COLOR: '{{color}}'
-      SLACK_MESSAGE: 'Workflow failed on ${{ github.repository }}'
+    name: Notify Slack on Failure
+    if: failure()
+    uses: rtCamp/action-slack-notify@v2
+    env:
+    SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+    SLACK_COLOR: '{{color}}'
+    SLACK_MESSAGE: 'Workflow failed on ${{ github.repository }}'
