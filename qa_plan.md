@@ -9,6 +9,14 @@
 - Navigation via auto_route
 - State management with Bloc
 
+### Priority Test Cases (Basic Smoke Test / Health Check)
+
+| Test Case            | Input                 | Expected Result            |
+| -------------------- | --------------------- | -------------------------- |
+| Search hotels        | "Madrid"              | Paginated results          |
+| Add/remove favorites | Tap heart icon        | Hotel toggled in favorites |
+| Navigate             | Dashboard → Favorites | Page transition occurs     |
+
 ## Detailed and Prioritized Test Scenarios
 
 ### Hotel Search
@@ -60,6 +68,31 @@
 | B01 | High     | Droppable prevents concurrent pagination | Scroll rapidly, triggering multiple page fetches | Only one fetch occurs, droppable strategy used |
 | B02 | Medium   | BLoC state updates correctly             | Trigger add/remove from favorites in succession  | Correct latest state maintained                |
 | B03 | Edge     | Bloc error handling                      | Simulate API failure or malformed response       | Emits failure state, UI displays error         |
+
+## Security Test Scenarios
+
+| ID    | Priority | Scenario                         | Description                                                     | Expected Outcome                                                 |
+| ----- | -------- | -------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
+| SEC01 | High     | Input SQL-like strings in search | Enter `'; DROP TABLE hotels;--` or similar in the search bar    | App handles input safely, no crash, no data corruption           |
+| SEC02 | Medium   | XSS string in inputs             | Input `<script>alert(1)</script>` if any HTML rendering is used | Rendered as plain text, not executed                             |
+| SEC03 | Medium   | Data tampering in Hive storage   | Manually edit Hive DB or use corrupted JSON                     | App detects/recovers from corruption or prompts reinitialization |
+
+## Offline/Connectivity Test Scenarios
+
+| ID    | Priority | Scenario                          | Description                                | Expected Outcome                                              |
+| ----- | -------- | --------------------------------- | ------------------------------------------ | ------------------------------------------------------------- |
+| OFF01 | High     | Open app while offline            | Disable network and launch app             | App loads local data (e.g. favorites) or shows offline screen |
+| OFF02 | High     | Search with no connection         | Enter query while disconnected             | Show "No internet" warning, no crash                          |
+| OFF03 | Medium   | Lose connection during pagination | Turn off Wi-Fi while scrolling hotels list | Show retry button or graceful fallback                        |
+| OFF04 | Medium   | Reconnect while app open          | Disconnect → perform action → reconnect    | App retries failed request or restores state                  |
+
+## Load & Performance Test Scenarios
+
+| ID     | Priority | Scenario                          | Description                        | Expected Outcome                                     |
+| ------ | -------- | --------------------------------- | ---------------------------------- | ---------------------------------------------------- |
+| LOAD01 | Medium   | Search returns 100+ results       | Mock large response in dev/staging | App paginates and doesn’t crash or stutter           |
+| LOAD02 | Medium   | Open app with 100 saved favorites | Populate Hive with large dataset   | Favorites page loads without lag                     |
+| LOAD03 | Low      | Rapid scroll of hotel list        | Scroll continuously for 30 seconds | No memory leak or crash, smooth scrolling maintained |
 
 ---
 
