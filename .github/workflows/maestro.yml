@@ -1,9 +1,10 @@
-name: Build and run Maestro tests (Flutter Android)
+name: Run Maestro Tests (Android)
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   tests:
