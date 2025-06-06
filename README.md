@@ -1,5 +1,3 @@
-# buenro-tests
-
 ## QA Environment Setup (Android):
 
 1. Clone repository with automated tests to your local machine:
