@@ -1,6 +1,6 @@
 # buenro-tests
 
-## QA environment setup:
+## QA Environment Setup (Android):
 
 1. Clone repository with automated tests to your local machine:
 
@@ -98,5 +98,5 @@ workflow_dispatch:`
         - Customize your preferences: Email, Web (GitHub UI)
         - Set the "Actions" event to the desired frequency (e.g., "Only failures").
 
-13. How to configure manual notification via Actions (e.g. Slack and etc.)
+13. How to configure manual notification via Actions (e.g. Slack and etc.):
     Use an action step in your workflow to send messages when jobs succeed or fail.
